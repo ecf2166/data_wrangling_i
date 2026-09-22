@@ -104,3 +104,14 @@ pulse_df = read_sas(
 pulse_df = janitor::clean_names(pulse_df)
 ```
 
+# What's so bad about `read.csv()`?
+
+Import pups with `read.csv()`
+
+```{r}
+pups_df_base = read.csv("data/FAS_pups.csv", skip = 3)
+
+pups_df_base
+```
+
+Won't show: lazy about variable mnames; super slow for big datasets.
