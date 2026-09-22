@@ -22,6 +22,7 @@ library(tidyverse)
 
 ``` r
 library(readxl)
+library(haven)
 ```
 
 Import our first dataset.
@@ -262,3 +263,15 @@ tt_df
     ## 1 Elf       331   513
     ## 2 Hobbit      0  2463
     ## 3 Man       401  3589
+
+## Import SAS
+
+Read in PULSE dataset
+
+``` r
+pulse_df = read_sas(
+  "data/public_pulse_data.sas7bdat"
+)
+
+pulse_df = janitor::clean_names(pulse_df)
+```
