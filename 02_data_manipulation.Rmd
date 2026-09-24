@@ -1,0 +1,63 @@
+---
+title: "02_data_manipulation"
+output: github_document
+date: "2026-09-24"
+---
+
+```{r}
+library(tidyverse)
+library(dplyr)
+```
+
+Load the litters and pups datasets. 
+
+```{r}
+litters_df =
+  read_csv( #always use read_csv() rather than read.csv()
+    file = "data/FAS_litters.csv", 
+    na = c("", "NA", ".")
+  ) 
+
+litters_df = janitor::clean_names(litters_df)
+
+pups_df = 
+  read_csv(
+    "data/FAS_pups.csv", 
+    skip = 3,  
+    na = c("", "NA", ".")
+  )
+
+pups_df = janitor::clean_names(pups_df)
+```
+
+# `select` some variables
+
+```{r}
+select(litters_df, group, litter_number)
+
+select(litters_df, group:gd_of_birth)
+
+select(litters_df, -group) # removes group
+
+select(litters_df, starts_with("gd"))
+
+select(litters_df, starts_with("gd"), group)
+
+select(litters_df, GROUP = group, everything()) # renames group to GROUP, and to keep everything else
+
+select(litters_df, -starts_with("gd"))
+```
+
+a couple of alternatives
+```{r}
+rename(litters_df, GROUP = group) #shorthand version of above select() fxn that renames
+
+relocate(litters_df, litter_number) #moves litter_number to the front
+```
+
+In the pups data, select litter number, sex, and PD ears
+
+```{r}
+select(pups_df, litter_number, sex, pd_ears)
+```
+
