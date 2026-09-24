@@ -144,4 +144,33 @@ pups_df =
   )
 ```
 
+sometimes the first thing isn't a data frame
+
+```{r}
+litters_df |> 
+  filter(group %in% c("con7", "con8")) |> 
+  lm(gd18_weight ~ gd0_weight, data = _) # the _ tells R that the df is litters_df
+```
+`select` vs `pull`
+
+```{r}
+litters_df |> 
+  select(group)
+
+litters_df |> 
+  pull(group)
+
+# select will always give you a data frame; if you have a data frame you should never be pulling stuff out of it
+```
+
+never do `$` --> takes things out of the dataframe for manipulations --> difficult to keep track of 
+
+
+pipes and viewing
+
+```{r}
+litters_df |> 
+  filter(group %in% c("con7","con8")) #|> 
+ # view() #don't keep view active when knitting
+```
 
